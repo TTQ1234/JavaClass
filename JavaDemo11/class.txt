@@ -1,0 +1,92 @@
+1.集合框架（容器）：存储多个数据元素，替换数组（不扩容 没有运算（手写））
+	collection 父接口 ：规范集合应该具备的方法：添加 删除
+			List  列表接口：列表类的规范，可以重复，可以根据index位置获得数据
+				add(index,数据) remove(index) get(index)
+				实现类：
+					ArrayList:继承了LIst接口的特点，可以存重复数据，并且可以根据下标获得数据
+							  数据接口（底层数数组，数据元素在一片区域（读取块，删除添加慢））
+				    	add(数据) 追加 Collection
+				    	add（indec,数据） 插入 Li️st
+				    	remove（数据） Collection
+				    	remove（index） List
+				    	get（index） List
+				    	clear（） Collection
+				    	isEmpty（） Collection
+				    	size（） Collection
+				    	
+				    LinkedList 链表：底层数据结构不一样，链式结构，空间不连续
+				    	add(数据) 追加 Collection
+				    	add（indec,数据） 插入 Li️st
+				    	remove（数据） Collection
+				    	remove（index） List
+				    	get（index） List
+				    	clear（） Collection
+				    	isEmpty（） Collection
+				    	size（） Collection
+				    	
+				    总结：ArrayList 底层数据，内存空间连续，读取块，添加和删除慢
+				    	 LinkedList 双层底层链表，读取慢，增删快
+				    	 （双向【一个节点记住两个位置，上一个节点的位置，一个是下一个节点的位置】）
+				    	 
+				    	 class Node<E>{//泛型
+				    	 	private E element;//节点的数据，泛型
+				    	 	//上一个节点位置（节点变量）
+				    	 	private Node preNode;
+				    	 	//下一个节点的位置（节点变量）
+				    	  	private Node nextNode;
+				    	 }
+				    	 
+				    	 class LinkedList{
+				    	 	private Node<E> first;//只要第一个节点的位置
+				    	 	private Node<E> last;//最后一个位置
+				    	 }
+				    	 
+			Set	  Set接口:不重复，不能根据位置获得数据(存进去的和出来的可能不一样)
+				  没有办法取单独数据
+				  
+				  不做容器用，做工具，不重复（过滤做去重）
+				  随机5个数字，要求不重复，可以存到Set中
+				  HashSet 底层哈希表，里面存放的数据不重复，如何保证不重复，同equals保证
+				  		  如果一个对象存在HashSet要求不重复，那么必须写equals方法	
+				  	 set存放对象，如何保证不重复
+				  TreeSet 排序，可以排序
+				  数:一对多关系，父亲可以有多个孩子，孩子只能有一个父亲
+				  二叉树：最多只有两个孩子节点的数叫做二叉树
+				  二叉排序数：左孩子比根小，右孩子比根答就是二叉排序树（排序特性）
+				  平衡二叉排序树：左右平衡，左右节点的个数一致，旋转
+				  红黑树：平衡二叉排序树，叶子节点和根颜色不一样
+				  遍历方式：先序（根左右），中序（左根右），后序（左右根）
+				  二叉排序树：中序遍历是有序的，如果删除节点，左孩子的极右，有孩子极左节点替换
+				  
+				  TreeSet：复杂类型排序
+				  		商品：商品名 价格 数量 按照价格排序
+				  	1）自然排序 如果对象存进TreeSet中想排序，必须实现Camparable，重写compareTo（）
+				  		String 八个包装类都实现了该接口，所以字符串和基本类型进去可以排序（字符串可以排序）
+				  		
+				  	2）缺点就是算法规定（单一），无法改变，站在高内聚的角度，排序和实体类应该没有太大关系
+				  容器带比较器，不同的比较器容器就可以实现不同的排序规则（比较器）
+				  	价格：价格排序的容器里面
+				  	数量：数量排序的容器里面
+			 	  TreeSet 优点排序，缺点Set无法数据，list集合里面，但是也能排序
+2.collection 集合操作类：给集合操作
+			sort（集合，比较器） 可以排序
+			
+			商品管理系统：商品，业务类（添加商品 查看商品 查看商品列表（默认） 
+					    按价格升序 按价格降序 按数量升序 按数量降序 
+					    根据商品名删除该商品 修改该商品的价格 修改该商品的数量）
+			
+			
+			Queue 队列接口：先进先出，添加在尾部，删除只能删头部
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

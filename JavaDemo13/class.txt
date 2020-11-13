@@ -1,0 +1,77 @@
+1.List和Set的区别？
+	List：可以重复，能够按精准位置获取值
+	Set：不重复，不能按index获取
+2.List的实现类
+	ArrayList：数组，读取块增删慢
+	LinkedList：链表，数据存储区域不连续，读取满，增删块
+	Vector：和ArrayList一样，线程安全
+3.Set的实现类
+	HashSet：不重复，依赖于equals方法
+	TreeSet：排序，红黑树
+	排序的规则：对象实现Comparable接口，重写CompareTo方法
+			  TreeSet构造方法实例化对象传进比较器，ComParator接口实现类对象
+4.Map是双列集合
+	TreeMap key排序
+	HashMap key不重复
+	HashTable 早起，和HashMap一样，线程安全
+5.异常Throwable
+	子类 Exception：异常，需要解决
+		RuntimeException：运行异常，错误，需要改代码
+				   空指针 数组越界 类转换异常 算数异常 等
+		编译已成：可能发生可以不发生，编译期间处理
+		1）thorws 抛异常，JVM获得异常崩溃
+		2）try...catch 捕获异常，处理异常
+		finally不管有没有都要执行
+6.File文件
+	磁盘中的文件和文件夹都称为文件
+	creatNewFile（） 新建文件
+	mkdirs（） 创建文件夹
+	delete（） 删除
+	extist（）是否存在
+	idFile（）是否为文件
+	isDirector（）是否为文件夹
+	
+	子类 Error
+7.计算机中设备与设备之间的信息传输都是通过流的形式，默认是字节流，根据流的方向
+	分为输入流和输出流，简称IO流（文件传输）
+	字节输入流：其他设备到内存，称为读操作，read
+	字节输出流：内存到其他设备，称为写操作，write
+8.java对于流的封装，因为与之交互的设备不一样，所有有多个类，文件，浏览器的，控制台，缓存...
+	父亲，约束IO流必须具备的方法
+	在IO包中，java.lang语言包（常用类，不要导包） java.util（操作类 集合，键盘扫描，随机，日期）
+	java.io 输入输出流 文件，流
+9.InputStream 输入流的父类，抽象类
+	InputStream
+	//   读取直接到内存
+   int 	read() 	从此输入流中读取一个字节的数据。
+//读取到数组,然后数组写到内存
+   int 	read​(byte[] b) 	从此输入流 b.length最多 b.length字节的数据读 b.length字节数组。
+   int 	read​(byte[] b, int off, int len) 	从此输入流 len最多 len字节的数据读入一个字节数组。
+	
+10.OutputStream 输出流的父类，抽象类
+	FileOutputStream//覆盖
+	FileOutputStream​(File file)	创建文件输出流以写入由指定的 File对象表示的文件。//是否追加true，不追加就覆盖
+	FileOutputStream​(File file, boolean append)	创建文件输出流以写入由指定的 File对象表示的文件。
+	FileOutputStream​(String name)	创建文件输出流以写入具有指定名称的文件。
+	FileOutputStream​(String name, boolean append)	创建文件输出流以写入具有指定名称的文件。
+	
+	FileOutputStream out = new FileOutputStream("e:\\1.txt") //创建输出流通道
+	//写文件，一个个字节写
+	一个数组一个数组的写
+	void	write​(byte[] b)	将指定字节数组中的 b.length字节写入此文件输出流。
+	一个字节数组的写
+	void	write​(byte[] b, int off, int len)	将从偏移量 off开始的指定字节数组中的 len字节写入此文件输出流。
+	一个字节一个字节的写 转的是ascii a 97
+	void	write​(int b)	将指定的字节写入此文件输出流。
+	
+	write.close（）；//销毁通道，关通道
+	
+11.字节流，是基本流，可以处理任何文件，但是中文文档不建议处理，容易乱码
+12.视频音频文件，复制
+13.高效流：
+	BufferinputStream
+	BufferOutputStream
+	方法一样
+	缓冲区，读到缓冲区，写到缓冲区，内存不和磁盘交互（寻址的时间太长），增加缓冲区，缓冲区会去从磁盘里面取数据，内存读，当内存快要读完了，缓冲区再去取
+		
+	
