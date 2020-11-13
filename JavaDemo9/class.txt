@@ -1,0 +1,185 @@
+1.多态：一种对象多种形态，父类引用指向子类对象
+	属性：编译看父亲，运行看父亲
+	方法：编译看父亲，运行看孩子
+	不能使用孩子特有的属性和方法，如果要使用，向下转型
+	
+2.抽象类：有抽象方法的类为抽象类，但是抽象类里面不一定有抽象方法
+	抽象类可以和普通类一样，有属性，有构造方法，有普通，有代码块
+	抽象类不能实例化对象，只能以多态的方法实例化对象，方法和构造方法都是给子类使用的
+	抽象类里面的抽象方法子类一定要实现/重写，如果不实现/重写，那么子类也是抽象类
+	
+	abstract class Person{
+		//抽象类，这个类里面可以没有抽象方法，但是一般抽象类里面都有抽象方法
+		public abstract void Hello();
+	}
+	Person p1 = new Person();//错误
+	p1.Hello();//虚方法，无法知晓，JVM崩溃
+	
+	class Chind extends Person{
+		public void Hello(){
+		sout hello；
+		}
+	}
+	Person p1 = new child();//多态
+	p1.hello;//运行看孩子，孩子的方法，具体的方法
+
+3.abstract 可不可以是private，不行，private孩子就无法重写，矛盾
+  abstract 可不可以final 修饰，不行，final修饰方法不能被子类重写和继承，矛盾
+  abstract 可不可以用static 修饰（与继承无关）不能，类所有，类名.***调用，抽象方法，JVM崩溃
+	
+4.顶级抽象类，里面全部是抽象的东西，接口
+	接口相当于目录，全部是抽象方法，做约束和架构
+	定义业务方法，抽象的，整个骨架
+	
+	public interface StudentService{
+	//添加学生的业务
+		public abstract void addStudentt(Student s);
+	//删除学生的业务
+		public abstract void deleteStudent(int sid);
+	//删除学生的业务
+		public abstract void deleteStudent(String name);
+	//接口方法一遍简写
+		void findById(int id);
+	}
+
+   接口就是为了让其他类取实现和重写方法，所以他的方法的访问权限都是public
+
+5.内部类
+	类里面可以有类，内部类
+		普通类
+		静态类
+
+6.匿名内部类和匿名对象一样，都可以实例化对象
+	cat cat = new cat()
+	add(cat)                ->   add(new cat())
+
+	匿名内部类：子类对象或者接口实现类对象
+
+8.Object  所有类的父亲，基类/根类
+  java.lang 语言
+  如果使用这个包里面的类无需导包
+  		String 在语言包里
+  		Scanner 不在语言包里
+  其他包的类，我们使用，必须导包
+  		
+  public class Object 老祖宗 ，他的方法所有类都可以继承和重写
+  类Object是类层次结构的根。 每个类都有Object作为超类
+  
+  看构造方法：能不能实例化对象，如果构造方法私有化，那么不能实例化对象
+  这时就要考虑是单例还是全部方法为静态
+
+  构造器 Object() 公开的
+  Obhect o1=new Object();//实例化对象
+  Object o2 = new Student();//多态
+  Object 03 = new Scanner(System.in);//多态
+普通方法：
+	equal()
+	
+		public boolean equals(Object obj) {
+        return (this == obj);
+    	}
+	 	class Person{//隐藏继承
+	 	//直接继承object的equals()
+	 	}
+	 	Person p1 = new Person();
+	 	Person p2 = new Person();
+	 	p1.equals(p2);//多态 false
+	 	
+	hashcode()
+	getClass()
+	clone()
+	toString()
+	
+	
+1.Object 
+	equals 和==的区别？
+	==是比较运算符，equals（）是方法，在Object中两者意思一样
+	我们可以重写equals()来比较属性值
+	
+	重写equals()要重写hashcode()
+	为了优化减少equals()方法的执行，当比较多个对象的属性值是否相等，我们可以先比较hashcode
+	如果hashcode相等再执行equals()，否则直接返回false
+	
+	getclass() 获得对象的类名，全路径类名(包名)
+	
+	toString() System.out.println(对象名)		调用对象的
+			   System.out.println(对象.toString())  两句话一样
+	全部类名@hashcode值的16进制（内存地址）
+	
+	子类重写toString() 输出属性值
+	
+	clone() 克隆
+	克隆一份一摸一样的对象，和你不是一个对象
+	浅克隆和深克隆的区别？
+	如果存在复杂类型的属性
+		class Family{
+			String mother;
+			String father;
+		}
+		class Person{
+			String name;
+			int age;
+			Family f =new Family();//复杂类型，家庭
+		}
+	finalize() GC回收对象的是会调用该对象的finalize方法，释放资源
+
+2.String 字符串
+	public final class String 不能被继承，没有子类
+	构造方法
+		String()
+		String(String original)
+		String s1 = new String();
+		String s2 = new String("123");
+	简写
+	String s3="123";//喜欢的简写方法
+	字符串是不变的；他们的值在创建后无法更改。
+	因为String对象是不可变的，所以可以共享他们。
+	String s1 = "123";
+	s1 = "456";
+	改变了吗？字符串“123”没变，另开了“456”的空间，s1指向
+	字符串和数组一旦开辟空间，无法改变
+	String 字符串常量，缺陷是做运算反复开空间
+	
+	String s1 = new String("123");//创建了几个对象
+		“123”常量 new String()堆 s1指向堆，堆指向常量池
+	
+	String s1 = "123";
+	String s2 = "123";
+	
+	String s3 = new String("123");
+	String s4 = new String("123");
+	s1==s2 true 常量池
+	s3==s4 false 堆 new 创建新的
+	s1==s3 false 一个在常量池一个在堆
+	
+	char charAt(int index)根据index 返回char
+	String s1=“abcdef”;
+	char c3=s1.charAt(2);//第三个位置上的字符
+	键盘输入一串英文字符串，统计数字的个数，小写字母的个数，大写字母的个数，其他符号的个数	
+	
+	
+3.比较方法
+	boolean euqals(Object obj) 是否相等
+	boolean equalsIgnoreCase(String str) 是否相等，不区分大小写，验证码
+	boolean contains(String str) 是否以str 开头
+	boolean startsWith(String str) 是否以str开头
+	boolean endWith(String str) 是否以str结尾 判断文件格式1.png。endwith
+	boolean isEmpty()是否为空 ==“” s1==“” 就是s1.isEmpty（）==true 
+	
+	^ $ 结束
+	[a-zA-Z0-9] 任意一个
+	量词
+		？ 0或者1个
+		+ 1个或者n个
+		* 0或者n个
+		{m} 只有m个
+		{,m} 最多m个
+		{n,} 至少n个
+		{n,m} n-m个
+		
+		\d 数字
+		\s 字母 数字 下划线
+	
+	split("")
+	replace("","")
+	

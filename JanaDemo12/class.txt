@@ -1,0 +1,75 @@
+1.Collection 顶层接口 集合应该具备的哪些方法	
+			 add(对象)  romove(对象) clear() isEmpty() size()
+2.List和Set的区别？
+	List是列表，可重复，可以根据index获取数据
+		add(index，数据)
+		remove(index)
+		
+	Set不重复，无法根据index获取数据
+3.List中的实现类ArrayList和LinkedList的区别？
+	ArrayList 底层数组，增删慢，查询快
+	Vector：安全 和ArrayList的关系就是StringBuilder（不安全）和StringBuffer（安全）之间的关系
+	LinkedList 底层链表，增删快，查询慢
+4.Set的实现类
+	HashSet 底层是哈希表，不重复
+	TreeSet 底层红黑树，排序
+5.Collections 集合操作类：集合排序（常用），shffule，和数组之间的转换，查找
+6.String StringBuffer StringBuilder
+  String 字符串常量，一旦定义，无法改变，做运算会反复开空间
+  StringBuffer和StringBuilder是可变字符串序列，解决字符串反复开空间的问题（工具），StringBuffer安全
+7.八个包装类
+	装箱：基本数据类型->包装类 
+	拆箱：意义不大 Integer.intValue()
+	字符串转基本类型 包装类.parse***
+	基本数据类型->字符串 拼接 12+“”
+	比较compareTo()
+8.Date Scanner System Runtime Math Random SimpleDateFormat
+
+9.Collection 单列集合，里面只存放数据，子接口Set无法根据位置获取数据，根据主键，双列集合key-value，连着主键和数据一起存放集合里面，主键唯一，那么就可以根据主键获得值
+  Map 结合，双列
+  Map是不是Collection的子接口，不是！
+  Collection是单列集合顶层接口，而Map是双列集合的顶层接口
+  
+  Map的实现类：HashMap：底层是哈希表 ，主键不重复
+  			  TreeMap：底层是红黑树，主键排序
+  Map一般做框架的配置文件，后端给前端数据的json格式
+10.异常 Throwable 具体类，异常情况，程序出问题了
+	Error 错误，程序员无法解决 具体类
+	Exception 异常，需要程序员处理 具体类 
+	1) 运行期间的异常，代码错误，需要修改代码 算术异常ArithmeticException 
+		数组越界ArrayIndexOutOfBoundsException 空指针NullPointerException 
+		类转换错误 向下转型错误ClassCastException
+    2）编译期间的异常，在写代码的时候Java提醒这以后可能出现异常，注意对他进行处理，如果出现异常怎么做
+		1）抛，遇到异常不处理，抛，谁调用我谁处理，main抛给JVM，JVM崩溃，程序到此结束，throws
+  		2) 处理 try{
+  			异常代码块
+  		}catch（异常对象）{
+  			问题的处理措施
+  		}
+   		3)finally :不管程序正确还是异常，都必须执行的代码，释放资源
+   		  return 还执不执行，肯定执行，除非JVM（System.exit）退出，finally不执行，否则finallu一定执行
+11.文件
+	之前都是内存的版，JVM关闭，存在集合里面的数据全部丢失RAM，不方便，不要瞬间，要永久保存，写在磁盘里面
+	文件抽象：包含文件和文件夹
+  	构造方法    public File(String pathname)     
+          public File(String parent, String child)   
+           private File(String child, File parent)
+ *普通方法:
+ *      public String getName()   获得名字   hello.txt
+ *      public String getAbsolutePath()     绝对路径    C:\新建文件夹\hello.txt
+ *      public boolean exists()   是否在磁盘存在
+ *      boolean isDirectory()  是否为文件夹
+ *      public boolean isFile()   是否为文件
+ *      public boolean isHidden()   是否为隐藏文件
+ *      public boolean createNewFile() throws IOException   创建文件
+ *      public boolean delete() 删除文件
+ *      public File[] listFiles()  ;将文件夹中的子文件全部列出
+ *      public boolean mkdir()创建文件夹
+ *      public boolean mkdirs()   创建父文件夹和自己(常用)
+  
+	
+	
+	
+	
+	
+	

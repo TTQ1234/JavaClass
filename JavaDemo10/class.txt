@@ -1,0 +1,85 @@
+1.StringBuffer 和 StringBuilder  功能一样，方法名也一样
+	一个可变的字符串序列StringBuilder 1.5 StringBuffer 1.0
+	解决了String不可变的问题
+	
+	构造方法：实例化对象
+		StringBuilder() 构造一个字符串构建器，其中不包含任何字符，初始容量为16个字符 扩容
+		StringBuilder(String str) 构造一个初始化为指定字符串内容的字符串构建器
+	
+		StringBuilder 和数组差不多，容易，里面有字符串，可以发生改变
+	
+		StringBuilder builder = new StringBuilder()；
+	
+	普通方法：
+		添加字符串 StringBuilder append（boolean b）最佳
+			builder.append（“aaa”）
+		插入 StringBuilder insert
+		删除字符串 StringBuilder delete
+		其他方法和字符串一样，求字符，分割.....
+		
+		为了解决String做运算的问题，如果String要做运算，请你先转成StringBuilder，做完运算再转成String，节约内存空间
+		常量：生命的周期最长，和static一样，不销毁
+		StringBuffer 和 StringBuilder一样，区分 StringBuffer 1.0 早起的，线程安全，速度慢，StringBuilder 不安全，速度快，以StringBuilder为主
+		
+		总结：String，StringBuffer，StringBuilder之间的区别
+		String常量不可变
+		StringBuilder和StringBuffer可变，但是Builder不安全，Buffer安全，合适的业务选择合适可变序列容器
+			
+			
+2.八个包装类
+	byte short int(重点)  long char       boolean float double    
+	Byte Short Interge   Long Character  Boolean Float Double
+	没有方法，那么有的时候我们要使用芳芳，需要先变成类，然后调用类的方法
+	
+	字符串->int  “12”->12  Interge.parseInt(“12”);//包装类的用法
+	
+	装箱：基本数据类型->包装类 类名.valueof(基本数据)
+			double b =1.2;
+			Double d1=Double.valueof(b);
+			JDK1.5之后自动装 Double d2=b;//自动，相当于JVM会帮我调用该方法
+	包装类->基本数据类型：拆洗 对象.***value()；
+			Double d1 = 10;
+			double d2=d1.doubleValue();
+			JDK1.5之后 double d3=d1;//自动，相当于JVM会帮我调用该方法
+	字符串装基本数据类型：包装类 类名.parse**()；
+		“12.3”-> 12.3 Double.parseDouble("12.3");
+		"12"->12 Integer.parseInt("12");
+		
+		
+3.集合框架
+		集合：多个数据元素，之前用数组，缺陷不扩容，和基本数据类型一样，无方法，使用不方便，大量的操作方法
+		什么是容器：存放多个数据元素，有人希望里面数据不重复，有人希望里面数据重复，有人希望排序，用的需求不同，容器也就不一样
+		集合不可能是一个类，多个类，称为集合框架（里面的容器比较多，可以满足多种需求）
+		做约束，不管是什么容器，必须具备容器该具备的一些特点：存数据，取数据，删数据，遍历数据，顶层接口
+			Collection 接口，顶层接口，约束，约束容器应该具备哪些方法（通用方法）
+		所在 java.util 工具包，使用结合框架的类，要导包
+		以后多个数据元素不要再用数组，数组使用不方便，采用集合框架替代
+	3.1 Collection<E> 集合层次结构中的根接口
+		<E> 泛型，定义容器 E代替类型，真实用的时候，在用真实的类型
+		Student[] s = new Student[100];//只能存Student类型，不通用
+		java的类必须通用，容器里面可以存放任何对象
+		可能存放student，可能存放user，<E> 就像形参，用E代表以后存放的类型
+		真实用的时候再明确类型
+		
+		集合层次结构中的根接口。 集合表示一组对象，称为其元素 。 
+		有些集合允许重复元素而其他集合则不允许。
+		 有些是有序的，有些是无序的。 证明实现类很多，美中实现类做一种容器的功能
+			boolean	add​(E e)	确保此集合包含指定的元素（可选操作）。
+			void	clear()	从此集合中删除所有元素（可选操作）。
+			boolean	contains​(Object o)	如果此collection包含指定的元素，则返回 true 。
+			boolean	isEmpty()	如果此集合不包含任何元素，则返回 true 。
+			boolean	remove​(Object o)	从此集合中移除指定元素的单个实例（如果存在）（可选操作）。
+			int	size()	返回此集合中的元素数。
+		实现类一定要重写实现，实现类可以使用
+	3.2 接口不能new 对象，实例化实现类对象
+		子接口： List：列表，里面数据可以重复，可以按照位置获得数组，和数组一样
+				set：数据不重复，存进的数据和读取来的位置可能不一样，无法按照位置获得数据元素
+				queue：队列，先进后出
+	3.3 List ：列表，接口，特点可以重复，可以按照精确位置获得值 index 可以获得index 位置上的值
+		 ArrayList 实现类，底层数组，就是对数组的封装
+			void	add​(int index, E element)	将指定元素插入此列表中的指定位置（可选操作）。
+			boolean	add​(E e)	将指定的元素追加到此列表的末尾（可选操作）。
+			E	get​(int index)	返回此列表中指定位置的元素。
+			E	remove​(int index)	删除此列表中指定位置的元素（可选操作）。
+			boolean	remove​(Object o)	从该列表中删除指定元素的第一个匹配项（如果存在）（可选操作）。
+
