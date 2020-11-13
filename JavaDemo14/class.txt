@@ -1,0 +1,76 @@
+1。java中设备与设备的传输用的是流，信息交互，都是流的形式
+	  根据方向：输入流和输出流
+	  计算机以字节为基本单位，所以字节输入流，字节输出流
+2.InputStream 字节输入流的父类，抽象类
+			  read（） 一个一个字节读取
+			  read（byte[] b） 读到字节数组
+		FileInputStream		文件读取
+		BufferInputStream	高效流
+		System.in			标准流，读取键盘输入
+3.OutPutStream	字节输出流父类，抽象的
+			  write（int b） 一个一个字节写
+			  write（byte[] b,0,length） 一个一个字节数组写
+		FileOutPutStream 写到文件
+		BufferOutputStream 高效流
+		PrintOutputStream	标准输出流，写到控制台
+			System.out
+4.ObjectInputStream（文件->对象 反序列化）和ObjectOutputStream（将对象写到文件序列）
+	序列化：持久化，就是将对象保存到文件，保存成二进制，加密的，写
+	反序列化：将文件内容变成对象，读操作
+5.中文乱码，一个一个字节读取，乱码，中文不止一个字节
+	编码表
+			Ascii	1个字节	7位	128个字符
+			ASCII的扩展	1个字节	8位	256个字符
+			欧洲的标识	拉丁码
+			ISO-8859-1	1个字节	8位
+			GB国标
+			GB2312
+			GBK 国际 中国（网站只是中国使用，那么GBK就可以）
+			国际码
+			万国码
+			UTF-8 3个字节 UTF-16 4个字节 UTF-32
+		一个UTF-8的编码及的中文，占3个字节，字节流容易乱码
+6.字符流=字节流+编码表 [中国特色，只有文本用字符流，其他格式用字节流]
+	Reader 字符输入流父类	抽象
+	Write  字符输出流父类 抽象	
+		InputStreamReader(字节流)		字节输入流转字符输入流
+		OutputStreamWrite(字节流)		字节输出流转字符输出流
+		
+		FileReader 文件字符串
+			FileReader（“文件名”） 文件输入字符流
+			FileWrite（“文件名”）	 文件输出字符流
+		
+		//键盘输入存到文件中，中文，字符流
+		高效的字符流
+		用的比较多
+		BufferedReader 高效字符输入流
+			readLine()
+		BufferedWrite  高效字符输出流
+			write(字符串);
+			
+		//键盘输入，写到文件
+7.装饰者设计模式
+	旧手机{
+		打电话
+	}
+	
+	迭代开发
+	新手机{
+		打电话
+		彩铃
+	}
+	
+	怎么做	继承（子类重写父类的方法）
+	
+	装饰者模式：用关联关系替代泛化关系，降低耦合
+		1、装饰类（newphone）和被装饰类（oldphone）继承/实现同一个抽象类/接口（定义大家共有的方法）
+		2、装饰者里面有个抽象了或者接口的属性
+			private Phone phone;
+		3、有参构造，参数为接口参数
+			public NewPhone(Phone phone){
+			this.phone=phone;
+			}
+		4、实例化装饰者类对象需要传入被装饰者的对象
+			NewPhone newPhone=new NewPhone(new OldPhone())
+			将被装饰者装饰成装饰者
+			旧手机装饰成新手机，就有新手机的功能
