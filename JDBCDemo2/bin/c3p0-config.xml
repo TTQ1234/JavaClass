@@ -1,0 +1,27 @@
+<c3p0-config>
+  <default-config>
+  <!-- 驱动 -->>
+    <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+    <!-- url ctrl+shift+/注释 -->>
+    <property name="jdbcUrl">jdbc:mysql://localhost:3306/employee?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;rewriteBatchedStatements=true</property>
+	<!-- 用户名 -->>
+    <property name="user">root</property>
+    <!-- 密码 -->>
+    <property name="password">ttq971117</property>
+    <!-- 初始化连接的个数，池子启动，初始化10个连接 -->>
+    <property name="initialPoolSize">10</property>
+    <!-- 60秒连接不用，关闭连接 -->>
+    <property name="maxIdleTime">60</property>
+    <!-- 池子最多开100个连接 -->>
+    <property name="maxPoolSize">100</property>
+    <!-- 池子里最少留10个连接 -->>
+    <property name="minPoolSize">10</property>
+    <!-- 连接不够，每次增长5个连接 -->>
+    <property name="acquireIncrement">5</property>
+    <!-- 最多支持200个Statement -->>
+    <property name="maxStatements">200</property>
+
+  </default-config>
+
+</c3p0-config>
+	
